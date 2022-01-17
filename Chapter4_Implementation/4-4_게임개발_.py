@@ -1,49 +1,49 @@
-n, m = map(int, input().split())
-d = [[0] * m for _ in range(n)]
+n, m = map(int,input().split())
+v = [[0] * n for _ in range(m)]
 
 x, y, direction = map(int,input().split())
-d[x][y] = 1
+v[x][y] = 1
 
-array = []
+graph = []
 for i in range(n):
-    array.append(list(map(int, input().split())))
+    graph.append(list(map(int,input().split())))
 
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
+dx = [1, 0, -1, 0]
+dy = [0, -1, 0, 1]
+
 
 def turn_left():
     global direction
-    if direction == 0:
+    direction -= 1
+    if direction == -1:
         direction = 3
-    else:
-        direction -= 1
+
 
 count = 1
 turn_time = 0
-
 while True:
     turn_left()
     nx = x + dx[direction]
     ny = y + dy[direction]
-    if d[nx][ny] == 0 and array[nx][ny] == 0:
-        d[nx][ny] = 1
+
+    if graph[nx][ny] == 0 and v[nx][ny] == 0:
+        v[nx][ny] = 1
         x = nx
         y = ny
         count += 1
-        turn_time = 0
-        print(x, y)
         continue
     else:
         turn_time += 1
     if turn_time == 4:
+        turn_left()
         nx = x - dx[direction]
         ny = y - dy[direction]
-        if array[nx][ny] == 0:
+        if graph[nx][ny] == 0:
             x = nx
             y = ny
-            print(x, y)
         else:
             break
         turn_time = 0
 print(count)
+
 
