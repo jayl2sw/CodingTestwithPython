@@ -1,11 +1,9 @@
-n ,m = map(int, input().split())
+n, m = map(int,input().split())
 
-result = 0
 for i in range(n):
-    data = list(map(int, input().split()))
-    min_value = min(data)
+    data = list(map(int,input().split()))
+    max = -999
+    if max < min(data):
+        max = min(data)
 
-    result = max(result, min_value)
-
-print(result)
-
+print(max)
